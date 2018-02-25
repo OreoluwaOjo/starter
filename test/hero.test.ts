@@ -11,17 +11,17 @@ const expect = chai.expect;
 describe('GET api/v1/heroes', () => {
 
   it('responds with JSON array', () => {
-    return chai.request(app).get('/api/v1/heroes')
+    return chai.request(app).get('/v1/heroes')
       .then(res => {
         expect(res.status).to.equal(200);
         expect(res).to.be.json;
         expect(res.body.heroes).to.be.an('array');
-        expect(res.body.heroes).to.have.length(5);
+        expect(res.body.heroes).to.have.length(6);
       });
   });
 
   it('should include Wolverine', () => {
-    return chai.request(app).get('/api/v1/heroes')
+    return chai.request(app).get('/v1/heroes')
       .then(res => {
         let Wolverine = res.body.heroes.find(hero => hero.name === 'Wolverine');
         expect(Wolverine).to.exist;
@@ -39,7 +39,7 @@ describe('GET api/v1/heroes', () => {
   describe('GET api/v1/heroes/:id', () => {
 
     it('responds with single JSON object', () => {
-      return chai.request(app).get('/api/v1/heroes/1')
+      return chai.request(app).get('/v1/heroes/59333047da71f02ccc65a275')
         .then(res => {
           expect(res.status).to.equal(200);
           expect(res).to.be.json;
@@ -48,7 +48,7 @@ describe('GET api/v1/heroes', () => {
     });
 
     it('should return Luke Cage', () => {
-      return chai.request(app).get('/api/v1/heroes/1')
+      return chai.request(app).get('/v1/heroes/59333047da71f02ccc65a275')
         .then(res => {
           expect(res.body.hero.name).to.equal('Luke Cage');
         });
